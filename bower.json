@@ -1,0 +1,21 @@
+{
+  "name": "gofish",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Felipe Monteiro <fm577c@att.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
