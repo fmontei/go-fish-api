@@ -3,17 +3,20 @@
 </head>
 <body>
 	<h1>GoFish</h1>
-	<button id="test">Create User Test</button>
+	<button id="testCreateUser">Create User Test</button>
+	<button id="testGetUserByEmail">Get User By Email Test</button>
+	<button id="testGetUserById">Get User By Id Test</button>
 </body>
 
 <script>
 	$(document).ready(function() {
-		$('#test').click(function() {
+		$('#testCreateUser').click(function() {
 			console.log("Creating user John Smith.");
 			var formData = {
 				firstname: "John",
 				lastname: "Smith",
 				password: "password",
+				email: "jsmith@gmail.com",
 				role: "user"
 			};
 
@@ -23,11 +26,54 @@
 			    data : formData,
 			    success: function(data)
 			    {
-			        console.log("success: " + JSON.stringify(data));
+			        console.log("Success: " + JSON.stringify(data));
 			    },
 			    error: function (data)
 			    {
-			 		console.log("error: " + JSON.stringify(data));
+			 		console.log("Error: " + JSON.stringify(data));
+			    }
+			});
+		});
+
+		$('#testGetUserByEmail').click(function() {
+			console.log("Getting user John Smith.");
+			var formData = {
+				email: "jsmith@gmail.com",
+				password: "password"
+			};
+
+			$.ajax({
+				url : "/user",
+			    type: "GET",
+			    data : formData,
+			    success: function(data)
+			    {
+			        console.log("Success: " + JSON.stringify(data));
+			    },
+			    error: function (data)
+			    {
+			 		console.log("Error: " + JSON.stringify(data));
+			    }
+			});
+		});
+
+		$('#testGetUserById').click(function() {
+			console.log("Getting user John Smith.");
+			var formData = {
+				user_id: 1
+			};
+
+			$.ajax({
+				url : "/user",
+			    type: "GET",
+			    data : formData,
+			    success: function(data)
+			    {
+			        console.log("Success: " + JSON.stringify(data));
+			    },
+			    error: function (data)
+			    {
+			 		console.log("Error: " + JSON.stringify(data));
 			    }
 			});
 		});

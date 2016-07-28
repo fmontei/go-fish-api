@@ -20,10 +20,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-// Get user by specified user_id
-app.get('/user/:user_id', function(req, res, next) {
-    req.user_id = req.params.user_id;
-    get_user(req, res, next);
-});
+// Get user by specified user_id or email/password
+app.get('/user', get_user);
 
 app.post('/user', create_user);
