@@ -10,6 +10,7 @@ router.use(function(req, res, next) {
         user_id = url_parts.query.user_id,
         email = url_parts.query.email,
         password = url_parts.query.password;
+        
     var query = "";
     if (user_id) {
         user_id = user_id.trim();
