@@ -5,6 +5,7 @@ var app = express();
 
 var get_user = require('./routes/get_user');
 var create_user = require('./routes/create_user');
+var delete_user = require('./routes/delete_user');
 
 app.use('/static/css/', express.static(__dirname + '/public/css/'));
 app.use('/static/js/', express.static(__dirname + '/public/js/'));
@@ -23,4 +24,8 @@ app.get('/', function(req, res) {
 // Get user by specified user_id or email/password
 app.get('/user', get_user);
 
+// Create a new user
 app.post('/user', create_user);
+
+// Delete user by specified user_id or email/password
+app.delete('/user', delete_user);
