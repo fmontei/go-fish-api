@@ -39,7 +39,7 @@ router.use(function(req, res, next) {
         }
     ], function(err, created_user_id) {
         if (!err) {
-            res.status(201).send({last_id: created_user_id});
+            res.status(200).send({last_id: created_user_id});
         } else {
             res.status(501).send('Error: ' + error + '.');
         }
