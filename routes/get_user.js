@@ -27,7 +27,7 @@ router.use(function(req, res, next) {
 			first = first.trim();
 			last = last.trim();
 			query = "select * from user where firstname = '" + first + "' and " +
-            "lastname = '" + last + "';";
+                "lastname = '" + last + "';";
 		} else if (first != null){
 			first = first.trim();
 			query = "select * from user where firstname = '" + first + "'";
@@ -35,7 +35,6 @@ router.use(function(req, res, next) {
 			last = last.trim();
 			query = "select * from user where lastname = '" + last + "'";
 		}
-		
 	}
 
     async.waterfall([
@@ -45,10 +44,10 @@ router.use(function(req, res, next) {
             });
         }
     ], function (err, rows) {
-        if (! err) {
-			if((last || first) && rows && rows.length > 0){
+        if (!err) {
+			if(rows && rows.length > 1){
 				res.status(200).send(rows);
-			} else if (rows && rows.length > 0) {
+			} else if (rows && rows.length == 1) {
                 res.status(200).send(rows[0]);
             } else if (rows && rows.length == 0) {
                 res.status(200).send('User with user_id, username, password: ' + user_id + ', ' + 
