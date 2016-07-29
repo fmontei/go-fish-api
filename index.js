@@ -7,9 +7,14 @@ var get_user = require('./routes/get_user');
 var create_user = require('./routes/create_user');
 var delete_user = require('./routes/delete_user');
 
-app.use('/static/css/', express.static(__dirname + '/public/css/'));
-app.use('/static/js/', express.static(__dirname + '/public/js/'));
-app.use('/static/lib/', express.static(__dirname + '/public/lib/'));
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+};
+
+app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
