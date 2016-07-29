@@ -33,7 +33,7 @@ router.use(function(req, res, next) {
                 res.status(200).send('Multiple users were deleted. Number: ' + changes + '.');
             }
         } else {
-            res.status(404).send('No such user was found. No records deleted.');
+            res.status(501).send('Error: ' + error + '.');
         }
     });
 });

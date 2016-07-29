@@ -16,4 +16,5 @@ var create_users_table_statement = "create table if not exists user(" +
 	"password varchar(30) not null," +
 	"role varchar(10) not null);";
 
+db.run("drop table if exists user;");
 db.run(create_users_table_statement);

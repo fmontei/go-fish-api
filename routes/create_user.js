@@ -41,7 +41,7 @@ router.use(function(req, res, next) {
         if (!err) {
             res.status(201).send({last_id: created_user_id});
         } else {
-            res.status(500).send('Failed to create user.');
+            res.status(501).send('Error: ' + error + '.');
         }
     });
 });

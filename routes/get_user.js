@@ -29,12 +29,15 @@ router.use(function(req, res, next) {
             });
         }
     ], function (err, rows) {
-        if (rows && rows.length > 0) {
-            res.status(200).send(rows[0]);
-        } else if (rows && rows.length == 0) {
-            res.status(200).send('User with user_id: ' + user_id + ' not found.');
+        if (! err) {
+            if (rows && rows.length > 0) {
+                res.status(200).send(rows[0]);
+            } else if (rows && rows.length == 0) {
+                res.status(200).send('User with user_id, username, password: ' + user_id + ', ' + 
+                    username + ', ' + password + ' not found.');
+            } 
         } else {
-            res.status(501).send('Something went wrong.');
+            res.status(501).send('Error: ' + error + '.');
         }
     });
 });
