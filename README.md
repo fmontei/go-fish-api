@@ -6,7 +6,7 @@
 * `npm install -g bower grunt-cli`
 
 ## Initialize DB:
-node scripts/init_node.js
+* node scripts/init_node.js
 
 ## Every time you pull changes:
 
@@ -21,9 +21,9 @@ node scripts/init_node.js
   * `lib/`: 3rd-party library files. This folder should be modified only
     by `Gruntfile.js`, which is executed using `grunt` and copies the necessary
     files from `bower_components`.
-* `routes/`: Instead of assigning all routes in `index.js`, create a router
+* `routes/`: Instead of assigning all routes in `index.js`, create a route
 for each part of the application in separate files here and then
-mount them in `index.js`. See how CAS works for an example.
+mount them in `index.js`.
 * `scripts/`: Database utilities.
 
 ## Misc
