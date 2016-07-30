@@ -22,8 +22,8 @@ router.use(function(req, res, next) {
         password = password.trim();
         query = "select * from user where email = '" + email + "' and " +
             "password = '" + password + "';";
-    } else if (first || last){
-		if(first != null && last != null){
+    } else if (first || last) {
+		if(first != null && last != null) {
 			first = first.trim();
 			last = last.trim();
 			query = "select * from user where firstname = '" + first + "' and " +

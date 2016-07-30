@@ -30,7 +30,7 @@ var create_emergency_contact_statemet = "create table if not exists " +
 	"state varchar(20)," +
 	"phone varchar(15)," +
 	"email varchar(50)," +
-	"FOREIGN KEY (user_id) references user(user_id));";
+	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
 
 var create_event_table_statement = "create table if not exists event(" +
 	"event_id integer primary key autoincrement not null," +
@@ -40,14 +40,14 @@ var create_event_table_statement = "create table if not exists event(" +
 	"event_organizer integer not null," +
 	"event_date date," +
 	"event_time time," +
-	"FOREIGN KEY (event_organizer) references user(user_id));";
+	"FOREIGN KEY (event_organizer) references user(user_id) on update cascade);";
 
 var create_event_signup_statement = "create table if not exists event_signup(" +
 	"event_signup_id integer primary key autoincrement not null," + 
 	"event_id not null," +
 	"user_id not null," +
-	"FOREIGN KEY (event_id) references event(event_id)," +
-	"FOREIGN KEY (user_id) references user(user_id));";
+	"FOREIGN KEY (event_id) references event(event_id) on delete cascade," +
+	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
 
 var create_equipment_statement = "create table if not exists equipment(" + 
 	"equipment_id integer primary key autoincrement not null," +
@@ -55,7 +55,7 @@ var create_equipment_statement = "create table if not exists equipment(" +
 	"name varchar(255) not null," +
 	"location varchar(255)," +
 	"user_id integer default 0 not null," +
-	"FOREIGN KEY (user_id) references user(user_id));";
+	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
 
 var init = function() {
 	var deferred = Q.defer();
