@@ -14,6 +14,12 @@
 * `bower install`
 * `grunt` 
 
+## Testing:
+
+* Change DB_NAME in .env to a something else like "test.db"
+* npm start
+* mocha tests/unit_tests.js
+
 ## Structure
 
 * `public/`: Static files such as JavaScript, images, CSS, fonts, etc. Files
