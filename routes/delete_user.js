@@ -33,7 +33,7 @@ router.use(function(req, res, next) {
                 res.status(200).send('Multiple users were deleted. Number: ' + changes + '.');
             }
         } else {
-            res.status(501).send('Error: ' + err + '.');
+            res.status(501).send(err);
         }
     });
 });

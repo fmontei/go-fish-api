@@ -16,9 +16,9 @@
 
 ## Testing:
 
-* Change DB_NAME in .env to a something else like "test.db"
-* npm start
-* mocha tests/unit_tests.js
+* Change DB_NAME in `.env` to a something else like "test.db"
+* `npm start`
+* `mocha tests/unit_tests.js`
 
 ## Structure
 

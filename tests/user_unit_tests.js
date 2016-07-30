@@ -36,15 +36,19 @@ describe('CreateUserTest', function() {
 			function(_error, _response, _body) {
 				error = _error;
 				response = _response;
-				body = JSON.parse(_body);
+				body = _body;
 				done();
 		});
 	});
 
 	it('create_user should add a new user to db', function() {
 		expect(error).to.equal(null);
+		expect(body).to.not.have.string('Error');
 		expect(response.statusCode).to.equal(200);
+
+		body = JSON.parse(body);
 		new_user_1.user_id = body.last_id;
+
 		expect(new_user_1.user_id).to.be.above(0);
 	});
 });
@@ -59,14 +63,16 @@ describe('GetUserTest_user_id', function() {
 		}, function(_error, _response, _body) {
 		    get_error = _error;
 			get_response = _response;
-			get_body = JSON.parse(_body);
+			get_body = _body;
 		    done();
 		});
 	});
 
 	it('get_user should get the right user by id from the db', function() {
 		expect(get_error).to.equal(null);
+		expect(get_body).to.not.have.string('Error');
 		expect(get_response.statusCode).to.equal(200);
+		get_body = JSON.parse(get_body);
 		for (param in new_user_1) {
 			expect(get_body[param]).to.equal(new_user_1[param]);
 		}
@@ -84,14 +90,16 @@ describe('GetUserTest_email_password', function() {
 		}, function(_error, _response, _body) {
 		    get_error = _error;
 			get_response = _response;
-			get_body = JSON.parse(_body);
+			get_body = _body;
 		    done();
 		});
 	});
 
 	it('get_user should get the right user by email/password from the db', function() {
 		expect(get_error).to.equal(null);
+		expect(get_body).to.not.have.string('Error');
 		expect(get_response.statusCode).to.equal(200);
+		get_body = JSON.parse(get_body);
 		for (param in new_user_1) {
 			expect(get_body[param]).to.equal(new_user_1[param]);
 		}
@@ -116,8 +124,9 @@ describe('GetUserTest_should_fail', function() {
 
 	it('get_user should fail', function() {
 		expect(get_error).to.be.a('null');
-		expect(get_response.statusCode).to.equal(204);
+		expect(get_response.statusCode).to.equal(200);
 		expect(get_body).to.be.a('string');
+		expect(get_body).to.have.string('not found');
 	});
 });
 
@@ -151,8 +160,10 @@ describe('DeleteUserTest_user_id', function() {
 		expect(delete_error).to.be.a('null');
 		expect(delete_response.statusCode).to.equal(200);
 		expect(delete_body).to.be.a('string');
+		expect(get_body).to.not.have.string('Error');
 		expect(get_error).to.be.a('null');
-		expect(get_response.statusCode).to.equal(204);
+		expect(get_response.statusCode).to.equal(200);
 		expect(get_body).to.be.a('string');
+		expect(get_body).to.have.string('not found');
 	});
 });

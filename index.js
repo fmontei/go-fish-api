@@ -7,9 +7,13 @@ var app = express();
 var request = require('request');
 
 var init_db = require('./scripts/init_db');
+
 var get_user = require('./routes/get_user');
 var create_user = require('./routes/create_user');
 var delete_user = require('./routes/delete_user');
+
+var get_emergency_contact = require('./routes/get_emergency_contact');
+var create_emergency_contact = require('./routes/create_emergency_contact');
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -38,12 +42,15 @@ app.get('/', function(req, res) {
 
 // Get user by specified user_id or email/password
 app.get('/user', get_user);
-
 // Create a new user
 app.post('/user', create_user);
-
 // Delete user by specified user_id or email/password
 app.delete('/user', delete_user);
+
+// Get user by specified user_id or email/password
+app.get('/emergency_contact', get_emergency_contact);
+// Create a new EC
+app.post('/emergency_contact', create_emergency_contact);
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("Listening on port " + (process.env.PORT || 3000));
