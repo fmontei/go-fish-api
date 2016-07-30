@@ -102,8 +102,8 @@ describe('CreateECTest', function() {
 		body_2 = JSON.parse(body_2);
 		new_ec_2.emergency_contact_id = body_2.last_id;
 
-		expect(new_ec_1.emergency_contact_id).to.be.above(0);
-		expect(new_ec_2.emergency_contact_id).to.be.above(0);
+		expect(new_ec_1.emergency_contact_id).to.be.a('Number');
+		expect(new_ec_2.emergency_contact_id).to.be.a('Number');
 	});
 });
 
