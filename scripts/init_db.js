@@ -1,7 +1,7 @@
 var async = require('async');
 var Q = require('q');
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('gofish.db');
+var db = new sqlite3.Database("gofish.db");
 
 var create_user_table_statement = "create table if not exists user(" +
 	"user_id integer primary key autoincrement not null," +
@@ -55,39 +55,61 @@ var create_equipment_statement = "create table if not exists equipment(" +
 	"user_id integer default 0 not null," +
 	"FOREIGN KEY (user_id) references user(user_id));";
 
-db.run("drop table if exists user;");
-db.run("drop table if exists emergency_contact;");
-db.run("drop table if exists event;");
-db.run("drop table if exists event_signup;");
-db.run("drop table if exists equipment;");
+var clear = function() {
+	db.run("delete from user;");
+	db.run("delete from emergency_contact;");
+	db.run("delete from event;");
+	db.run("delete from event_signup;");
+	db.run("delete from equipment;");
+};
 
-async.waterfall([
-    function(callback) {
-		db.run(create_user_table_statement, function(err) {
-			callback(err);
-		});
-	},
-	function(callback, table) {
-		db.run(create_emergency_contact_statemet, function(err) {
-			callback(err);
-		});
-	},
-	function(callback, table) {
-		db.run(create_event_table_statement, function(err) {
-			callback(err);
-		});
-	},
-	function(callback, table) {
-		db.run(create_event_signup_statement, function(err) {
-			callback(err);
-		});
-	},
-	function(callback, table) {
-		db.run(create_equipment_statement, function(err) {
-			callback(err);
-		});
-	},
-], function(err) {
-	if (err) console.log("Error: " + err);
-});
+var init = function() {
+	db.run("drop table if exists user;");
+	db.run("drop table if exists emergency_contact;");
+	db.run("drop table if exists event;");
+	db.run("drop table if exists event_signup;");
+	db.run("drop table if exists equipment;");
 
+	async.waterfall([
+	    function(callback) {
+			db.run(create_user_table_statement, function(err) {
+				callback(err);
+			});
+		},
+		function(callback, table) {
+			db.run(create_emergency_contact_statemet, function(err) {
+				callback(err);
+			});
+		},
+		function(callback, table) {
+			db.run(create_event_table_statement, function(err) {
+				callback(err);
+			});
+		},
+		function(callback, table) {
+			db.run(create_event_signup_statement, function(err) {
+				callback(err);
+			});
+		},
+		function(callback, table) {
+			db.run(create_equipment_statement, function(err) {
+				callback(err);
+			});
+		},
+	], function(err) {
+		if (err) console.log("Error: " + err);
+	});
+};
+
+if (require.main === module) {
+    init();
+} 
+
+module.exports = {
+	clear: function() {
+		clear();
+	},
+	init: function() {
+		init();
+	}
+};

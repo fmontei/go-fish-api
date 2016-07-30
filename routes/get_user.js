@@ -3,15 +3,15 @@ var sqlite3 = require('sqlite3').verbose();
 var async = require('async');
 var url = require('url');
 var router = express.Router();
-var db = new sqlite3.Database('gofish.db');
+var db = new sqlite3.Database(process.env.DB_NAME);
 
 router.use(function(req, res, next) {
     var url_parts = url.parse(req.url, true),
         user_id = url_parts.query.user_id,
         email = url_parts.query.email,
         password = url_parts.query.password,
-		first = url.parts.query.firstname,
-		last = url.parse.query.lastname;
+		first = url_parts.query.firstname,
+		last = url_parts.query.lastname;
         
     var query = "";
     if (user_id) {
@@ -50,8 +50,8 @@ router.use(function(req, res, next) {
 			} else if (rows && rows.length == 1) {
                 res.status(200).send(rows[0]);
             } else if (rows && rows.length == 0) {
-                res.status(200).send('User with user_id, username, password: ' + user_id + ', ' + 
-                    username + ', ' + password + ' not found.');
+                res.status(200).send('User with user_id, username, password: ' + 
+                    user_id + ' not found.');
             } 
         } else {
             res.status(501).send('Error: ' + error + '.');

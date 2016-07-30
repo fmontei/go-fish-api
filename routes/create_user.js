@@ -3,7 +3,7 @@ var sqlite3 = require('sqlite3').verbose();
 var async = require('async');
 
 var router = express.Router();
-var db = new sqlite3.Database('gofish.db');
+var db = new sqlite3.Database(process.env.DB_NAME);
 
 router.use(function(req, res, next) {
     var firstname = req.body.firstname,
@@ -41,7 +41,7 @@ router.use(function(req, res, next) {
         if (!err) {
             res.status(200).send({last_id: created_user_id});
         } else {
-            res.status(501).send('Error: ' + error + '.');
+            res.status(501).send('Error: ' + err + '.');
         }
     });
 });

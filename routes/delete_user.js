@@ -2,7 +2,7 @@ var express = require('express');
 var sqlite3 = require('sqlite3').verbose();
 var async = require('async');
 var router = express.Router();
-var db = new sqlite3.Database('gofish.db');
+var db = new sqlite3.Database(process.env.DB_NAME);
 
 router.use(function(req, res, next) {
     var user_id = req.body.user_id,
