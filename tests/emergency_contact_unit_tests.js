@@ -97,3 +97,42 @@ describe('GetECTest_emergency_contact_id', function() {
 		}
 	});
 });
+
+describe('DeleteECTest_emergency_contact_id', function() {
+	var get_error, get_response, get_body,
+		delete_error, delete_response, delete_body;
+
+	beforeEach(function(done) {
+		request({
+		    url: 'http://localhost:3000/emergency_contact',
+		    method: 'DELETE',
+		    form: { emergency_contact_id: new_ec_1.emergency_contact_id }
+		}, function(_error, _response, _body) {
+		    delete_error = _error;
+		    delete_response = _response;
+		    delete_body = _body;
+		    
+		    request({
+			    url: 'http://localhost:3000/emergency_contact?' + 
+			    'emergency_contact_id=' + new_ec_1.emergency_contact_id,
+			    method: 'GET'
+			}, function(_error, _response, _body) {
+			    get_error = _error;
+			    get_response = _response;
+			    get_body = _body;
+			    done();
+			});
+		});
+	});
+
+	it('deleted EC should not be retrieved', function() {
+		expect(delete_error).to.be.a('null');
+		expect(delete_response.statusCode).to.equal(200);
+		expect(delete_body).to.be.a('string');
+		expect(get_body).to.not.have.string('Error');
+		expect(get_error).to.be.a('null');
+		expect(get_response.statusCode).to.equal(200);
+		expect(get_body).to.be.a('string');
+		expect(get_body).to.have.string('not found');
+	});
+});

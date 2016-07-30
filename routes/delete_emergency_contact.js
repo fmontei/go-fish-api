@@ -5,16 +5,17 @@ var router = express.Router();
 var db = new sqlite3.Database(process.env.DB_NAME);
 
 router.use(function(req, res, next) {
-    var user_id = req.body.user_id,
+    var emergency_contact_id = req.body.emergency_contact_id,
         email = req.body.email;
 
     var query = "";
-    if (user_id) {
-        user_id = user_id.trim();
-        query = "delete from user where user_id = '" + user_id + "';";
+    if (emergency_contact_id) {
+        emergency_contact_id = emergency_contact_id.trim();
+        query = "delete from emergency_contact where emergency_contact_id = '" + 
+            emergency_contact_id + "';";
     } else if (email) {
         email = email.trim();
-        query = "delete from user where email = '" + email + "';";
+        query = "delete from emergency_contact where email = '" + email + "';";
     }
 
     async.waterfall([
@@ -26,7 +27,7 @@ router.use(function(req, res, next) {
     ], function (err, lastId, changes) {
         if (!err) {
             if (changes == 0) {
-                res.status(200).send({message: 'No such user was found. No records deleted.'});
+                res.status(200).send({message: 'No such EC was found. No records deleted.'});
             } else if (changes == 1) {
                 res.status(200).send({message: 'Deleted user.'});
             } else {

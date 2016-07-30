@@ -14,6 +14,7 @@ var delete_user = require('./routes/delete_user');
 
 var get_emergency_contact = require('./routes/get_emergency_contact');
 var create_emergency_contact = require('./routes/create_emergency_contact');
+var delete_emergency_contact = require('./routes/delete_emergency_contact');
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -51,6 +52,8 @@ app.delete('/user', delete_user);
 app.get('/emergency_contact', get_emergency_contact);
 // Create a new EC
 app.post('/emergency_contact', create_emergency_contact);
+// Delete a new EC
+app.delete('/emergency_contact', delete_emergency_contact);
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("Listening on port " + (process.env.PORT || 3000));
