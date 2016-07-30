@@ -7,7 +7,7 @@ var db = new sqlite3.Database(process.env.DB_NAME);
 router.use(function(req, res, next) {
     var user_id = req.body.user_id,
         email = req.body.email;
-        
+
     var query = "";
     if (user_id) {
         user_id = user_id.trim();
@@ -33,7 +33,7 @@ router.use(function(req, res, next) {
                 res.status(200).send('Multiple users were deleted. Number: ' + changes + '.');
             }
         } else {
-            res.status(501).send('Error: ' + error + '.');
+            res.status(501).send('Error: ' + err + '.');
         }
     });
 });

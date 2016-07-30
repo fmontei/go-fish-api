@@ -1,7 +1,9 @@
+var express = require('express');
 var async = require('async');
 var Q = require('q');
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database("gofish.db");
+var router = express.Router();
+var db = new sqlite3.Database(process.env.DB_NAME);
 
 var create_user_table_statement = "create table if not exists user(" +
 	"user_id integer primary key autoincrement not null," +
@@ -55,15 +57,9 @@ var create_equipment_statement = "create table if not exists equipment(" +
 	"user_id integer default 0 not null," +
 	"FOREIGN KEY (user_id) references user(user_id));";
 
-var clear = function() {
-	db.run("delete from user;");
-	db.run("delete from emergency_contact;");
-	db.run("delete from event;");
-	db.run("delete from event_signup;");
-	db.run("delete from equipment;");
-};
-
 var init = function() {
+	var deferred = Q.defer();
+
 	db.run("drop table if exists user;");
 	db.run("drop table if exists emergency_contact;");
 	db.run("drop table if exists event;");
@@ -97,19 +93,20 @@ var init = function() {
 			});
 		},
 	], function(err) {
-		if (err) console.log("Error: " + err);
+		deferred.resolve(err);
 	});
+
+	return deferred.promise;
 };
 
-if (require.main === module) {
-    init();
-} 
+router.use(function(req, res, next) {
+	init().then(function(err) {
+		if (!err) {
+			res.status(200).send("Successfully initialized DB.");
+		} else {
+			res.status(501).send("Error initializing DB: " + err + ".");
+		}
+	});
+});
 
-module.exports = {
-	clear: function() {
-		clear();
-	},
-	init: function() {
-		init();
-	}
-};
+module.exports = router;

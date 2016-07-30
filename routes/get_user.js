@@ -50,8 +50,7 @@ router.use(function(req, res, next) {
 			} else if (rows && rows.length == 1) {
                 res.status(200).send(rows[0]);
             } else if (rows && rows.length == 0) {
-                res.status(200).send('User with user_id, username, password: ' + 
-                    user_id + ' not found.');
+                res.status(204).send('User provided parameters not found.');
             } 
         } else {
             res.status(501).send('Error: ' + error + '.');
