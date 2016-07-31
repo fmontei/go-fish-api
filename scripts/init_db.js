@@ -72,26 +72,34 @@ var init = function() {
 				callback(err);
 			});
 		},
-		function(callback, table) {
+		function(callback) {
 			db.run(create_emergency_contact_statemet, function(err) {
 				callback(err);
 			});
 		},
-		function(callback, table) {
+		function(callback) {
 			db.run(create_event_table_statement, function(err) {
 				callback(err);
 			});
 		},
-		function(callback, table) {
+		function(callback) {
 			db.run(create_event_signup_statement, function(err) {
 				callback(err);
 			});
 		},
-		function(callback, table) {
+		function(callback) {
 			db.run(create_equipment_statement, function(err) {
 				callback(err);
 			});
 		},
+		function(callback) {
+			db.run("insert into user(firstname, lastname, email, password, role) " +
+				" values('admin', 'admin', 'admin', 'admin', 'admin');",
+				function(err) {
+					callback(err);
+				}
+			);
+		}
 	], function(err) {
 		deferred.resolve(err);
 	});
