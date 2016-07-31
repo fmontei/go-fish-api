@@ -14,7 +14,7 @@ var create_user_table_statement = "create table if not exists user(" +
 	"zip varchar(10) ," +
 	"state varchar(20)," +
 	"phone varchar(15)," +
-	"email varchar(50)," +
+	"email varchar(50) unique," +
 	"password varchar(30) not null," +
 	"role varchar(10) not null);";
 

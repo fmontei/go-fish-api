@@ -17,11 +17,16 @@ router.use(function(req, res, next) {
     if (user_id) {
         user_id = user_id.trim();
         query = "select * from user where user_id = '" + user_id + "';";
-    } else if (email && password) {
-        email = email.trim();
-        password = password.trim();
-        query = "select * from user where email = '" + email + "' and " +
-            "password = '" + password + "';";
+    } else if (email || password) {
+        if (email && password) {
+            email = email.trim();
+            password = password.trim();
+            query = "select * from user where email = '" + email + "' and " +
+                "password = '" + password + "';";
+        } else if (email) {
+            email = email.trim();
+            query = "select * from user where email = '" + email + "';";
+        } 
     } else if (first || last) {
 		if(first != null && last != null) {
 			first = first.trim();

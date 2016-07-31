@@ -68,7 +68,7 @@ describe('GetUserTest_user_id', function() {
 		});
 	});
 
-	it('get_user should get the right user by id from the db', function() {
+	it('get_user should get the right user by user_id from the db', function() {
 		expect(get_error).to.equal(null);
 		expect(get_body).to.not.have.string('Error');
 		expect(get_response.statusCode).to.equal(200);
