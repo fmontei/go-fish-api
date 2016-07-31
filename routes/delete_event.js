@@ -14,7 +14,7 @@ router.use(function(req, res, next) {
         query = "delete from event where event_id = '" + event_id + "';";
     } else if (event_name) {
         event_name = event_name.trim();
-        query = "delete from user where event_name = '" + event_name + "';";
+        query = "delete from event where event_name = '" + event_name + "';";
     }
 
     async.waterfall([
