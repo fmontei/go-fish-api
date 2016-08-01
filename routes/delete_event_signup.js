@@ -10,27 +10,15 @@ router.use(function(req, res, next) {
         user_id = req.body.user_id;
 
     var query = "";
-    /*if (event_id) {
-        event_id = event_id.trim();
-        query = "delete from event where event_id = '" + event_id + "';";
-    } else if (event_name) {
-        event_name = event_name.trim();
-        query = "delete from user where event_name = '" + event_name + "';";
-    }*/
-
     if (event_id && user_id){
         event_id = event_id.trim();
         user_id = user_id.trim();
-
-        query = "delete from event_signup where event_id = '" + event_id + "' AND user_id = '" + user_id + "';";
-    }
-
-    else if (event_signup_id){
+        query = "delete from event_signup where event_id = '" + 
+            event_id + "' AND user_id = '" + user_id + "';";
+    } else if (event_signup_id){
         event_signup_id = event_signup_id.trim();
-        query = "delete from event_signup where event_signup_id = '" + event_id +"';";
+        query = "delete from event_signup where event_signup_id = '" + event_id + "';";
     }
-
-
 
     async.waterfall([
         function(callback) {

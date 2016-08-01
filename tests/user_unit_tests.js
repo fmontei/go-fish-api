@@ -28,28 +28,66 @@ var new_user_1 = {
 	role: 'user'
 };
 
+var new_user_2 = {
+	firstname: randomString(10),
+	lastname: randomString(10),
+	address: randomString(10),
+	city: randomString(10),
+	zip: randomString(10),
+	state: randomString(10),
+	phone: randomString(10),
+	email: randomString(10),
+	password: randomString(10),
+	role: 'user'
+};
+
+
 describe('CreateUserTest', function() {
-	var error, response, body;
+	var error_1, response_1, body_1,
+		error_2, response_2, body_2;
 
 	beforeEach(function(done) {
-		request.post('http://localhost:3000/user', { form: new_user_1 }, 
-			function(_error, _response, _body) {
-				error = _error;
-				response = _response;
-				body = _body;
-				done();
+		async.waterfall([
+			function(callback) {
+				request.post('http://localhost:3000/user', { form: new_user_1 }, 
+					function(_error, _response, _body) {
+						error_1 = _error;
+						response_1 = _response;
+						body_1 = _body;
+						callback(error_1);
+				});
+			},
+			function(callback) {
+				request.post('http://localhost:3000/user', { form: new_user_2 }, 
+					function(_error, _response, _body) {
+						error_2 = _error;
+						response_2 = _response;
+						body_2 = _body;
+						callback(error_2);
+				});
+			}
+		], function(err) {
+			if (err) console.log("Something went wrong: " + err);
+			done();
 		});
 	});
 
 	it('create_user should add a new user to db', function() {
-		expect(error).to.equal(null);
-		expect(body).to.not.have.string('Error');
-		expect(response.statusCode).to.equal(200);
-
-		body = JSON.parse(body);
-		new_user_1.user_id = body.last_id;
-
+		expect(error_1).to.equal(null);
+		expect(body_1).to.not.have.string('Error');
+		body_1 = JSON.parse(body_1);
+		expect(body_1).to.be.instanceof(Object);
+		new_user_1.user_id = body_1.last_id;
+		expect(response_1.statusCode).to.equal(200);
 		expect(new_user_1.user_id).to.be.a('Number');
+
+		expect(error_2).to.equal(null);
+		expect(body_2).to.not.have.string('Error');
+		body_2 = JSON.parse(body_2);
+		expect(body_2).to.be.instanceof(Object);
+		new_user_2.user_id = body_2.last_id;
+		expect(response_2.statusCode).to.equal(200);
+		expect(new_user_2.user_id).to.be.a('Number');
 	});
 });
 
@@ -76,6 +114,39 @@ describe('GetUserTest_user_id', function() {
 		for (param in new_user_1) {
 			expect(get_body[param]).to.equal(new_user_1[param]);
 		}
+	});
+});
+
+describe('GetUsersTest', function() {
+	var get_error, get_response, get_body;
+
+	beforeEach(function(done) {
+		request({
+		    url: 'http://localhost:3000/users', 
+		    method: 'GET'
+		}, function(_error, _response, _body) {
+		    get_error = _error;
+			get_response = _response;
+			get_body = _body;
+		    done();
+		});
+	});
+
+	it('get_users should get all the users from db', function() {
+		expect(get_error).to.equal(null);
+		expect(get_body).to.not.have.string('Error');
+		expect(get_response.statusCode).to.equal(200);
+		get_body = JSON.parse(get_body);
+		expect(get_body).to.be.instanceOf(Array);
+		expect(get_body).to.have.length.above(2);
+		var match = 0;
+		for (var i = 0; i < get_body.length; i++) {
+			if (get_body[i].user_id == new_user_1.user_id ||
+				get_body[i].user_id == new_user_2.user_id) {
+				match += 1;
+			}
+		}
+		expect(match).to.equal(2);
 	});
 });
 

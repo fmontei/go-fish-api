@@ -14,7 +14,7 @@ var create_user_table_statement = "create table if not exists user(" +
 	"zip varchar(10) ," +
 	"state varchar(20)," +
 	"phone varchar(15)," +
-	"email varchar(50) unique," +
+	"email varchar(50) unique not null," +
 	"password varchar(30) not null," +
 	"role varchar(10) not null);";
 
@@ -26,10 +26,10 @@ var create_emergency_contact_statemet = "create table if not exists " +
 	"lastname varchar(30) not null," +
 	"address varchar(70)," +
 	"city varchar(30)," +
-	"zip varchar(10) ," +
+	"zip varchar(10)," +
 	"state varchar(20)," +
 	"phone varchar(15)," +
-	"email varchar(50)," +
+	"email varchar(50) unique," +
 	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
 
 var create_event_table_statement = "create table if not exists event(" +
@@ -51,8 +51,8 @@ var create_event_signup_statement = "create table if not exists event_signup(" +
 
 var create_equipment_statement = "create table if not exists equipment(" + 
 	"equipment_id integer primary key autoincrement not null," +
-	"barcode varchar(255) unique on conflict ignore," +
-	"name varchar(255) not null," +
+	"barcode varchar(255) unique," +
+	"name varchar(255) unique not null," +
 	"location varchar(255)," +
 	"user_id integer default 0 not null," +
 	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";

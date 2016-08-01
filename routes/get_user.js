@@ -16,7 +16,7 @@ router.use(function(req, res, next) {
     var query = "";
     if (user_id) {
         user_id = user_id.trim();
-        query = "select * from user where user_id = '" + user_id + "';";
+        query = "select * from user where user_id = " + user_id + ";";
     } else if (email || password) {
         if (email && password) {
             email = email.trim();
@@ -28,12 +28,12 @@ router.use(function(req, res, next) {
             query = "select * from user where email = '" + email + "';";
         } 
     } else if (first || last) {
-		if(first != null && last != null) {
+		if (first != null && last != null) {
 			first = first.trim();
 			last = last.trim();
 			query = "select * from user where firstname = '" + first + "' and " +
                 "lastname = '" + last + "';";
-		} else if (first != null){
+		} else if (first != null) {
 			first = first.trim();
 			query = "select * from user where firstname = '" + first + "'";
 		} else {
