@@ -11,7 +11,7 @@ router.use(function(req, res, next) {
     var query = "";
     if (user_id) {
         user_id = user_id.trim();
-        query = "delete from user where user_id = '" + user_id + "';";
+        query = "delete from user where user_id = " + user_id + ";";
     } else if (email) {
         email = email.trim();
         query = "delete from user where email = '" + email + "';";

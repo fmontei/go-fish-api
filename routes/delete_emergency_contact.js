@@ -11,8 +11,8 @@ router.use(function(req, res, next) {
     var query = "";
     if (emergency_contact_id) {
         emergency_contact_id = emergency_contact_id.trim();
-        query = "delete from emergency_contact where emergency_contact_id = '" + 
-            emergency_contact_id + "';";
+        query = "delete from emergency_contact where emergency_contact_id = " + 
+            emergency_contact_id + ";";
     } else if (email) {
         email = email.trim();
         query = "delete from emergency_contact where email = '" + email + "';";

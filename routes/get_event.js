@@ -13,7 +13,7 @@ router.use(function(req, res, next) {
     var query = "";
     if (event_id) {
         event_id = event_id.trim();
-        query = "select * from event where event_id = '" + event_id + "';";
+        query = "select * from event where event_id = " + event_id + ";";
     } else if (event_name) {
         event_name = event_name.trim();
         query = "select * from event where event_name = '" + event_name + "';";

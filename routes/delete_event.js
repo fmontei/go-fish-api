@@ -11,7 +11,7 @@ router.use(function(req, res, next) {
     var query = "";
     if (event_id) {
         event_id = event_id.trim();
-        query = "delete from event where event_id = '" + event_id + "';";
+        query = "delete from event where event_id = " + event_id + ";";
     } else if (event_name) {
         event_name = event_name.trim();
         query = "delete from event where event_name = '" + event_name + "';";

@@ -13,11 +13,11 @@ router.use(function(req, res, next) {
     if (event_id && user_id){
         event_id = event_id.trim();
         user_id = user_id.trim();
-        query = "delete from event_signup where event_id = '" + 
-            event_id + "' AND user_id = '" + user_id + "';";
+        query = "delete from event_signup where event_id = " + 
+            event_id + " and user_id = " + user_id + ";";
     } else if (event_signup_id){
         event_signup_id = event_signup_id.trim();
-        query = "delete from event_signup where event_signup_id = '" + event_id + "';";
+        query = "delete from event_signup where event_signup_id = " + event_id + ";";
     }
 
     async.waterfall([

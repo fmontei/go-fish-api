@@ -15,7 +15,7 @@ router.use(function(req, res, next) {
     var query = "";
     if (user_id) {
         user_id = user_id.trim();
-        query = "select * from emergency_contact where user_id = " + user_id;
+        query = "select * from emergency_contact where user_id = " + user_id + ";";
     } else if (email) {
         email = email.trim();
         query = "select * from emergency_contact where email = '" + email + "';";

@@ -18,7 +18,7 @@ router.use(function(req, res, next) {
     event_id = event_id.trim();
         
     var query = "select * from map_marker where user_id = " + user_id + " and " +
-        "event_id = " + event_id ";";
+        "event_id = " + event_id + ";";
 
     async.waterfall([
         function(callback) {
