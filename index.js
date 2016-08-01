@@ -25,6 +25,9 @@ var get_emergency_contact = require('./routes/get_emergency_contact');
 var create_emergency_contact = require('./routes/create_emergency_contact');
 var delete_emergency_contact = require('./routes/delete_emergency_contact');
 
+var get_map_marker = require('./routes/get_map_marker');
+var create_map_marker = require('./routes/create_map_marker');
+
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -79,6 +82,11 @@ app.get('/emergency_contact', get_emergency_contact);
 app.post('/emergency_contact', create_emergency_contact);
 // Delete a new EC
 app.delete('/emergency_contact', delete_emergency_contact);
+
+// Get all map markers by user_id and event_id
+app.get('/map_marker', get_map_marker);
+// Create a new map marker for a user in an event
+app.post('/map_marker', create_map_marker);
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("Listening on port " + (process.env.PORT || 3000));

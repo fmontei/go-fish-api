@@ -57,6 +57,18 @@ var create_equipment_statement = "create table if not exists equipment(" +
 	"user_id integer default 0 not null," +
 	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
 
+var create_map_marker_statement = "create table if not exists map_marker(" +
+	"map_marker_id integer primary key autoincrement not null," +
+	"event_id integer not null," +
+	"user_id integer not null," +
+	"title varchar(30) not null," +
+	"fish_type varchar(30)," +
+	"fish_description varchar(50)," +
+	"coordinates varchar(50) not null," +
+	"unique(event_id, user_id, title) on conflict replace," +
+	"foreign key (event_id) references event(event_id)," +
+	"foreign key (user_id) references user(user_id));";
+
 var init = function() {
 	var deferred = Q.defer();
 
@@ -65,6 +77,7 @@ var init = function() {
 	db.run("drop table if exists event;");
 	db.run("drop table if exists event_signup;");
 	db.run("drop table if exists equipment;");
+	db.run("drop table if exists map_marker;");
 
 	async.waterfall([
 	    function(callback) {
@@ -93,6 +106,10 @@ var init = function() {
 			});
 		},
 		function(callback) {
+			db.run(create_map_marker_statement, function(err) {
+				callback(err);
+			});
+		},function(callback) {
 			db.run("insert into user(firstname, lastname, email, password, role) " +
 				" values('admin', 'admin', 'admin', 'admin', 'admin');",
 				function(err) {

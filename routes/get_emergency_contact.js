@@ -15,22 +15,22 @@ router.use(function(req, res, next) {
     var query = "";
     if (user_id) {
         user_id = user_id.trim();
-        query = "select * from emergency_contact where user_id = '" + user_id + "'";
+        query = "select * from emergency_contact where user_id = " + user_id;
     } else if (email) {
         email = email.trim();
-        query = "select * from emergency_contact where email = '" + email + "'";
+        query = "select * from emergency_contact where email = '" + email + "';";
     } else if (first || last){
 		if (first != null && last != null) {
 			first = first.trim();
 			last = last.trim();
 			query = "select * from emergency_contact where firstname = '" + first + "' and " +
-                "lastname = '" + last + "'";
+                "lastname = '" + last + "';";
 		} else if (first != null) {
 			first = first.trim();
-			query = "select * from emergency_contact where firstname = '" + first + "'";
+			query = "select * from emergency_contact where firstname = '" + first + "';";
 		} else {
 			last = last.trim();
-			query = "select * from emergency_contact where lastname = '" + last + "'";
+			query = "select * from emergency_contact where lastname = '" + last + "';";
 		}
 	}
 
