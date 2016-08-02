@@ -81,13 +81,13 @@ var create_item_table_statement = "create table if not exists item(" +
 var init = function() {
 	var deferred = Q.defer();
 
-	db.run("drop table if exists user;");
+	/*db.run("drop table if exists user;");
 	db.run("drop table if exists emergency_contact;");
 	db.run("drop table if exists event;");
 	db.run("drop table if exists event_signup;");
 	db.run("drop table if exists equipment;");
 	db.run("drop table if exists map_marker;");
-	db.run("drop table if exists item;");
+	db.run("drop table if exists item;");*/
 
 	async.waterfall([
 	    function(callback) {
