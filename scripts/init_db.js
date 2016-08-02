@@ -78,6 +78,16 @@ var create_item_table_statement = "create table if not exists item(" +
 	"foreign key (event_id) references event(event_id)," +
 	"foreign key (assigned_user_id) references user(user_id));";
 
+var create_location_statement = "create table if not exists location(" +
+	"location_id integer primary key autoincrement not null," +
+	"latitude float," +
+	"longitude float," +
+	"firstname varchar(30) not null," +
+	"lastname varchar(30) not null," +
+	"user_id integer not null," +
+	"unique(user_id) on conflict replace,"  +
+	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
+
 var init = function() {
 	var deferred = Q.defer();
 
@@ -87,7 +97,9 @@ var init = function() {
 	db.run("drop table if exists event_signup;");
 	db.run("drop table if exists equipment;");
 	db.run("drop table if exists map_marker;");
-	db.run("drop table if exists item;");*/
+	db.run("drop table if exists item;");
+	db.run("drop table if exists location")
+	*/
 
 	async.waterfall([
 	    function(callback) {
@@ -124,7 +136,13 @@ var init = function() {
 			db.run(create_item_table_statement, function(err) {
 				callback(err);
 			});	
-		}, function(callback) {
+		}, 
+		function(callback) {
+			db.run(create_location_statement, function(err) {
+				callback(err);
+			});	
+		}, 
+		function(callback) {
 			db.run("insert into user(firstname, lastname, email, password, role) " +
 				" values('admin', 'admin', 'admin', 'admin', 'admin');",
 				function(err) {
