@@ -25,7 +25,7 @@ router.use(function(req, res, next) {
         	}
         }
     }
-    query += ";"; 
+    query += " order by item_id;"; 
 
     async.waterfall([
         function(callback) {

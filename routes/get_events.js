@@ -18,7 +18,8 @@ router.use(function(req, res, next) {
     } 
     else if (user_id) {
         user_id = user_id.trim();
-        query = "select event.event_id, event.event_name, event.event_desc, event.event_address, event.event_organizer, event.event_date, event.event_time from event inner join event_signup on event.event_id = event_signup.event_id where user_id = " 
+        query = "select event.event_id, event.event_name, event.event_desc, event.event_address, event.event_organizer, event.event_date, " +
+            "event.event_time from event inner join event_signup on event.event_id = event_signup.event_id where user_id = " 
             + user_id + " order by event.event_id;";   
     } 
 

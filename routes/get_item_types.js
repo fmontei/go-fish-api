@@ -15,7 +15,7 @@ router.use(function(req, res, next) {
         event_id = event_id.trim();
         query += " where event_id = " + event_id;
     } 
-    query += ";";
+    query += " order by item_type;";
 
     async.waterfall([
         function(callback) {
