@@ -34,8 +34,8 @@ var get_item_types = require('./routes/get_item_types');
 var create_item = require('./routes/create_item');
 var assign_item = require('./routes/assign_item');
 
-var get_locations = require('./routes/get_locations');
-var create_location = require('./routes/create_location');
+//var get_locations = require('./routes/get_locations');
+//var create_location = require('./routes/create_location');
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -109,9 +109,9 @@ app.get('/map_marker', get_map_marker);
 app.post('/map_marker', create_map_marker);
 
 // Get all of the locations within the radius
-app.get('/location', get_locations);
+//app.get('/location', get_locations);
 // Create user in the location table
-app.post('/location', create_location);
+//app.post('/location', create_location);
 
 app.listen(process.env.PORT || 3000, function() {
     console.log("Listening on port " + (process.env.PORT || 3000));

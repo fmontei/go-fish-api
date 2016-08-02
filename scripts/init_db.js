@@ -137,12 +137,12 @@ var init = function() {
 				callback(err);
 			});	
 		}, 
-		function(callback) {
+		/*function(callback) {
 			db.run(create_location_statement, function(err) {
 				callback(err);
 			});	
 		}, 
-		/*function(callback) {
+		function(callback) {
 			db.run("insert into user(firstname, lastname, email, password, role) " +
 				" values('admin', 'admin', 'admin', 'admin', 'admin');",
 				function(err) {
