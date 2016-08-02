@@ -9,9 +9,13 @@ router.use(function(req, res, next) {
     var url_parts = url.parse(req.url, true),
         latitude = url_parts.query.latitude,
         longitude = url_parts.query.longitude;
-            
-    var query = "select firstname, lastname, latitude, longitude, user_id from location where latitude between " + latitude + "-1 and " 
+
+    var query = "select * from location order by user_id";
+    
+    if(latitude && longitude) {
+        query = "select firstname, lastname, latitude, longitude, user_id from location where latitude between " + latitude + "-1 and " 
                 + latitude + "+1 and longitude between " + longitude + "-1 and " + longitude + "+1;";
+    }
     async.waterfall([
         function(callback) {
             db.all(query, function(err, rows) {
