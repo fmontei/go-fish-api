@@ -39,7 +39,7 @@ var create_event_table_statement = "create table if not exists event(" +
 	"event_address varchar(255)," +
 	"event_organizer integer not null," +
 	"event_date varchar(255)," +
-	"event_time time varchar(255)," +
+	"event_time varchar(255)," +
 	"FOREIGN KEY (event_organizer) references user(user_id) on update cascade);";
 
 var create_event_signup_statement = "create table if not exists event_signup(" +
