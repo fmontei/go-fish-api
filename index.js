@@ -9,6 +9,7 @@ var request = require('request');
 var init_db = require('./scripts/init_db');
 
 var get_event = require('./routes/get_event');
+var get_events = require('./routes/get_events');
 var create_event = require('./routes/create_event');
 var delete_event = require('./routes/delete_event');
 
@@ -60,6 +61,8 @@ app.get('/', function(req, res) {
 
 // Get event by specified event_id or event_name
 app.get('/event', get_event);
+// Get event by specified event_id or event_name
+app.get('/events', get_events);
 // Create a new event
 app.post('/event', create_event);
 // Delete event by specified event_id or event_name
