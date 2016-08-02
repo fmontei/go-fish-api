@@ -12,19 +12,21 @@ router.use(function(req, res, next) {
         item_type = url_parts.query.item_type;
 
         
-    var query = "";
+    var query = "select * from item";
     if (event_id) {
-        event_id = event_id.trim();
-        query = "select * from item where event_id = " + event_id;
-        if (user_id) {
-        	user_id = user_id.trim();
-        	query += " and user_id = " + user_id;
-        	if (item_type) {
-        		item_type = item_type.trim();
-        		query += " and item_type = '" + item_type + "'";
-        	}
-        }
+    	event_id = event_id.trim();
+    	query += " where event_id = " + event_id;
     }
+    if (user_id) {
+    	user_id = user_id.trim();
+    	if (query.indexOf("where") === -1) query += " where user_id = " + user_id;
+    	else query += " and user_id = " + user_id;
+    }
+    if (item_type) {
+		item_type = item_type.trim();
+		if (query.indexOf("where") === -1) query += " where item_type = '" + item_type + "'";
+		else query += " and item_type = '" + item_type + "'";
+	}
     query += " order by item_id;"; 
 
     async.waterfall([

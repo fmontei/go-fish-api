@@ -35,7 +35,7 @@ router.use(function(req, res, next) {
 				res.status(200).send(rows);
 			} else {
                 res.status(200).send(
-                    {'message': 'No users found.'}
+                    {'message': 'No events found.'}
                 );
             } 
         } else {
