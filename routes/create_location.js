@@ -8,7 +8,7 @@ router.use(function(req, res, next) {
     var firstname = req.body.firstname,
         lastname = req.body.lastname,
         latitude = req.body.latitude,
-        longitude = req.body.longitude;
+        longitude = req.body.longitude,
         user_id = req.body.user_id;
         
     async.waterfall([
