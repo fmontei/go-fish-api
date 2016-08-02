@@ -12,16 +12,6 @@ router.use(function(req, res, next) {
             
     var query = "select firstname, lastname, latitude, longitude, user_id from location where latitude between " + latitude + "-1 and " 
                 + latitude + "+1 and longitude between " + longitude + "-1 and " + longitude + "+1;";
-    // if (event_id) {
-    //     event_id = event_id.trim();
-    //     /*query = "select * from user where event_id = " + 
-    //         event_id + " order by user_id;";*/
-	
-    //     query = "select * from user inner join event_signup on user.user_id = event_signup.user_id where event_id = " + event_id + " order by user.user_id;";   
-
-            
-    // } 
-
     async.waterfall([
         function(callback) {
             db.all(query, function(err, rows) {

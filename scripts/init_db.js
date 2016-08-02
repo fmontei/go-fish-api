@@ -137,7 +137,7 @@ var init = function() {
 				callback(err);
 			});	
 		}, 
-		/*function(callback) {
+		function(callback) {
 			db.run(create_location_statement, function(err) {
 				callback(err);
 			});	
@@ -149,7 +149,7 @@ var init = function() {
 					callback(err);
 				}
 			);
-		}*/
+		}
 	], function(err) {
 		deferred.resolve(err);
 	});
