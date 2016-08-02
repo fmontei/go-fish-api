@@ -75,6 +75,7 @@ var create_item_table_statement = "create table if not exists item(" +
 	"assigned_user_id integer," +
 	"item_name varchar(30) not null," +
 	"item_type varchar(30) not null," +
+	"unique(event_id, item_name, item_type) on conflict replace," +
 	"foreign key (event_id) references event(event_id)," +
 	"foreign key (assigned_user_id) references user(user_id));";
 
