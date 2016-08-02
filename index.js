@@ -28,6 +28,11 @@ var delete_emergency_contact = require('./routes/delete_emergency_contact');
 var get_map_marker = require('./routes/get_map_marker');
 var create_map_marker = require('./routes/create_map_marker');
 
+var get_items = require('./routes/get_items');
+var get_item_types = require('./routes/get_item_types');
+var create_item = require('./routes/create_item');
+var assign_item = require('./routes/assign_item');
+
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -82,6 +87,15 @@ app.get('/emergency_contact', get_emergency_contact);
 app.post('/emergency_contact', create_emergency_contact);
 // Delete a new EC
 app.delete('/emergency_contact', delete_emergency_contact);
+
+// Get item
+app.get('/items', get_items);
+// Get item types
+app.get('/item_types', get_item_types);
+// Create a new item
+app.post('/item', create_item);
+// Assign an item to a user
+app.post('/assign_item', assign_item);
 
 // Get all map markers by user_id and event_id
 app.get('/map_marker', get_map_marker);
