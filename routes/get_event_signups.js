@@ -29,9 +29,11 @@ router.use(function(req, res, next) {
         }
     ], function (err, rows) {
         if (!err) {
-			if (rows && rows.length >= 1) {
+			if (rows && rows.length > 1) {
 				res.status(200).send(rows);
-			} else if (!rows || rows.length == 0) {
+			} else if (rows && rows.length == 1) {
+                res.status(200).send(rows[0]);
+            } else if (!rows || rows.length == 0) {
                 res.status(200).send(
                     {'message': 'No Event Signups found.'}
                 );
