@@ -97,7 +97,7 @@ describe('GetEventTest_event_id', function() {
 		expect(get_error).to.equal(null);
 		expect(get_body).to.not.have.string('Error');
 		expect(get_response.statusCode).to.equal(200);
-		get_body = JSON.parse(get_body);
+		get_body = JSON.parse(get_body)[0];
 		for (param in new_event_1) {
 			expect(get_body[param]).to.equal(new_event_1[param]);
 		}
@@ -123,7 +123,7 @@ describe('GetEventTest_event_name', function() {
 		expect(get_error).to.equal(null);
 		expect(get_body).to.not.have.string('Error');
 		expect(get_response.statusCode).to.equal(200);
-		get_body = JSON.parse(get_body);
+		get_body = JSON.parse(get_body)[0];
 		for (param in new_event_1) {
 			expect(get_body[param]).to.equal(new_event_1[param]);
 		}

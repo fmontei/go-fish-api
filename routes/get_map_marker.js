@@ -12,6 +12,7 @@ router.use(function(req, res, next) {
 
     if (!user_id || !event_id) {
         res.status(400).send({'message': 'user_id and event_id must be provided.'});
+        return;
     }
 
     user_id = user_id.trim();

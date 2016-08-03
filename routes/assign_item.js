@@ -13,6 +13,7 @@ router.use(function(req, res, next) {
         
     if ((!item_id && !user_id) || (!item_name && !item_type && !user_id)) {
     	res.status(400).send("(item_id and user_id) or (item_name, item_type and user_id) must be provided.");
+        return;
     }
 
     var query = "";

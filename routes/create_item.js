@@ -11,6 +11,7 @@ router.use(function(req, res, next) {
 
     if (!event_id || !item_name || !item_type) {
     	res.status(400).send('event_id and item_name and item_type must be provided.');
+        return;
     }
         
     async.waterfall([
