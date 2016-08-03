@@ -17,8 +17,9 @@ router.use(function(req, res, next) {
         query = "select * from event_signup where event_id = " + event_id + ";";
     } else if (user_id) {
         user_id = user_id.trim();
-        query = "select * from event_signup inner join event on event_signup.event_id = " +
-            "event.event_id where event_signup.user_id = " + user_id + ";";
+        query = "select * from event_signup inner join event on " +
+            "event_signup.event_id = event.event_id where event_signup.user_id = " + 
+            user_id + ";";
     } else if (event_signup_id) {
         event_signup_id = event_signup_id.trim();
         query = "select * from event_signup where event_signup_id = " +
@@ -33,11 +34,13 @@ router.use(function(req, res, next) {
         }
     ], function (err, rows) {
         if (!err) {
-			if (rows && rows.length > 1) {
-				res.status(200).send(rows);
-			} else if (!rows || rows.length == 0) {
+            if (rows && rows.length > 1) {
+                res.status(200).send(rows);
+            } else if (rows && rows.length == 1) {
+                res.status(200).send(rows[0]);
+            } else if (!rows || rows.length == 0) {
                 res.status(200).send(
-                    {'message': 'Event Signup with provided parameters not found.'}
+                    {'message': 'Event with provided parameters not found.'}
                 );
             } 
         } else {

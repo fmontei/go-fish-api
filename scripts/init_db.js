@@ -46,8 +46,8 @@ var create_event_signup_statement = "create table if not exists event_signup(" +
 	"event_signup_id integer primary key autoincrement not null," + 
 	"event_id integer not null," +
 	"user_id integer not null," +
-	"FOREIGN KEY (event_id) references event(event_id) on delete cascade," +
-	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
+	"foreign key(event_id) references event(event_id) on delete cascade," +
+	"foreign key(user_id) references user(user_ud) on delete cascade);";
 
 var create_equipment_statement = "create table if not exists equipment(" + 
 	"equipment_id integer primary key autoincrement not null," +
@@ -99,9 +99,8 @@ var init = function() {
 	db.run("drop table if exists equipment;");
 	db.run("drop table if exists map_marker;");
 	db.run("drop table if exists item;");
-	db.run("drop table if exists location")
-	*/
-
+	db.run("drop table if exists location;");*/
+	
 	async.waterfall([
 	    function(callback) {
 			db.run(create_user_table_statement, function(err) {
@@ -115,11 +114,6 @@ var init = function() {
 		},
 		function(callback) {
 			db.run(create_event_table_statement, function(err) {
-				callback(err);
-			});
-		},
-		function(callback) {
-			db.run(create_event_signup_statement, function(err) {
 				callback(err);
 			});
 		},
@@ -143,6 +137,11 @@ var init = function() {
 				callback(err);
 			});	
 		}, 
+		function(callback) {
+			db.run(create_event_signup_statement, function(err) {
+				callback(err);
+			});
+		},
 		function(callback) {
 			db.run("insert into user(firstname, lastname, email, password, role) " +
 				" values('admin', 'admin', 'admin', 'admin', 'admin');",

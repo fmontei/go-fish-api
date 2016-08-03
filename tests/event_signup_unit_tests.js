@@ -62,7 +62,6 @@ describe('CreateEventSignupTest', function() {
 			},
 			// Join event
 			function(callback) {
-				console.log(new_event_1.event_id + " " + new_user_1.user_id);
 				request.post('http://localhost:3000/event_signup', 
 					{ form: { event_id: new_event_1.event_id, user_id: new_user_1.user_id } }, 
 					function(_error, _response, _body) {
