@@ -28,6 +28,7 @@ var create_emergency_contact = require('./routes/create_emergency_contact');
 var delete_emergency_contact = require('./routes/delete_emergency_contact');
 
 var get_map_marker = require('./routes/get_map_marker');
+var get_map_markers = require('./routes/get_map_markers');
 var create_map_marker = require('./routes/create_map_marker');
 
 var get_items = require('./routes/get_items');
@@ -108,6 +109,7 @@ app.post('/assign_item', assign_item);
 
 // Get all map markers by user_id and event_id
 app.get('/map_marker', get_map_marker);
+app.get('/map_markers', get_map_markers);
 // Create a new map marker for a user in an event
 app.post('/map_marker', create_map_marker);
 

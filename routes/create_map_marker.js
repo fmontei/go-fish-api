@@ -12,8 +12,8 @@ router.use(function(req, res, next) {
         fish_description = req.body.fish_description,
         coordinates = req.body.coordinates;
 
-    if (!user_id || !event_id) {
-        res.status(400).send({'message': 'user_id and event_id must be provided.'});
+    if (!user_id || !event_id || !coordinates) {
+        res.status(400).send({'message': 'user_id and event_id and coordinates must be provided.'});
     }
         
     async.waterfall([
