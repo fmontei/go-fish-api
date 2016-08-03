@@ -11,19 +11,15 @@ router.use(function(req, res, next) {
         event_signup_id = url_parts.query.event_signup_id,
         user_id = url_parts.query.user_id;
         
-    var query = "";
+
+    var query = "select * from event_signup";
     if (event_id) {
         event_id = event_id.trim();
-        query = "select * from event_signup where event_id = " + event_id + ";";
-    } else if (user_id) {
-        user_id = user_id.trim();
-        query = "select * from event_signup inner join event on event_signup.event_id = " +
-            "event.event_id where user_id = " + user_id + ";";
-    } else if (event_signup_id) {
-        event_signup_id = event_signup_id.trim();
-        query = "select * from event_signup where event_signup_id = " +
-            event_signup_id + ";";
+        query += " where event_id = " + event_id;
     }
+    query += " order by event_signup_id;";
+
+    console.log(query);
 
     async.waterfall([
         function(callback) {
@@ -37,7 +33,7 @@ router.use(function(req, res, next) {
 				res.status(200).send(rows);
 			} else if (!rows || rows.length == 0) {
                 res.status(200).send(
-                    {'message': 'Event Signup with provided parameters not found.'}
+                    {'message': 'No Event Signups found.'}
                 );
             } 
         } else {

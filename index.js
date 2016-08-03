@@ -14,6 +14,7 @@ var create_event = require('./routes/create_event');
 var delete_event = require('./routes/delete_event');
 
 var get_event_signup = require('./routes/get_event_signup');
+var get_event_signups = require('./routes/get_event_signups');
 var create_event_signup = require('./routes/create_event_signup');
 var delete_event_signup = require('./routes/delete_event_signup');
 
@@ -73,6 +74,8 @@ app.delete('/event', delete_event);
 
 // Get people signed up for event or get what events a person is signed up to
 app.get('/event_signup', get_event_signup);
+// Get all event signups, optionally by event_id
+app.get('/event_signups', get_event_signups);
 // Create a record of user signing up for event
 app.post('/event_signup', create_event_signup);
 // Delete a record of user signing up for event

@@ -1,4 +1,3 @@
-// Jon
 var express = require('express');
 var sqlite3 = require('sqlite3').verbose();
 var async = require('async');
