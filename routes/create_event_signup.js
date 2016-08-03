@@ -19,9 +19,9 @@ router.use(function(req, res, next) {
                 callback(err, this.lastID);
             });
         }
-    ], function(err, created_user_id) {
+    ], function(err, created_event_signup_id) {
         if (!err) {
-            res.status(200).send({last_id: created_user_id});
+            res.status(200).send({last_id: created_event_signup_id});
         } else {
             res.status(501).send(err);
         }
