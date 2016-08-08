@@ -111,14 +111,14 @@ var dummy_data = [
 var init = function() {
 	var deferred = Q.defer();
 
-	db.run("drop table if exists user;");
+	/*db.run("drop table if exists user;");
 	db.run("drop table if exists emergency_contact;");
 	db.run("drop table if exists event;");
 	db.run("drop table if exists event_signup;");
 	db.run("drop table if exists equipment;");
 	db.run("drop table if exists map_marker;");
 	db.run("drop table if exists item;");
-	db.run("drop table if exists location;");
+	db.run("drop table if exists location;");*/
 	
 	async.waterfall([
 	    function(callback) {
@@ -161,7 +161,7 @@ var init = function() {
 				callback(err);
 			});
 		},
-		function(callback) {
+		/*function(callback) {
 			for (var i = 0; i < dummy_data.length; i++) {
 				db.run(dummy_data[i],
 					function(err) {
@@ -169,7 +169,7 @@ var init = function() {
 					}
 				);
 			}
-		}
+		}*/
 	], function(err) {
 		deferred.resolve(err);
 	});
