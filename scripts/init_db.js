@@ -89,6 +89,25 @@ var create_location_statement = "create table if not exists location(" +
 	"unique(user_id) on conflict replace,"  +
 	"FOREIGN KEY (user_id) references user(user_id) on delete cascade);";
 
+var dummy_data = [
+	"insert into user(firstname, lastname, email, password, role) values('admin', 'admin', 'admin@gmail.com', 'admin', 'Admin');",
+	"insert into user(firstname, lastname, email, password, role) values('veteran', 'veteran', 'veteran@gmail.com', 'veteran', 'Veteran');",
+	"insert into user(firstname, lastname, email, password, role) values('Jonathan', 'Chang', 'jchang@gmail.com', 'veteran', 'Veteran');",
+	"insert into user(firstname, lastname, email, password, role) values('Jesse', 'Chau', 'jchau@gmail.com', 'veteran', 'Veteran');",
+	"insert into user(firstname, lastname, email, password, role) values('David', 'Purcell', 'dpurcell@gmail.com', 'veteran', 'Veteran');",
+	"insert into user(firstname, lastname, email, password, role) values('Samantha', 'Blanco', 'sblanco@gmail.com', 'veteran', 'Veteran');",
+	"insert into user(firstname, lastname, email, password, role) values('Felipe', 'Monteiro', 'fmonteiro@gmail.com', 'veteran', 'Veteran');",
+	"insert into user(firstname, lastname, email, password, role) values('Nathan', 'Hagar', 'nhagar@gmail.com', 'veteran', 'Veteran');",
+	"insert into event(event_name, event_organizer) values('Fishathon', 1);",
+	"insert into event(event_name, event_organizer) values('Susquehanna Event', 1);",
+	"insert into location(latitude, longitude, firstname, lastname, user_id) values(33.7750855, -84.3887360, 'Jonathan', 'Chang', 3);",
+	"insert into location(latitude, longitude, firstname, lastname, user_id) values(33.7726865, -84.3861181, 'Jesse', 'Chau', 4);",
+	"insert into location(latitude, longitude, firstname, lastname, user_id) values(33.7747377, -84.3830497, 'David', 'Purcell', 5);",
+	"insert into location(latitude, longitude, firstname, lastname, user_id) values(33.7716698, -84.3892617, 'Samantha', 'Blanco', 6);",
+	"insert into location(latitude, longitude, firstname, lastname, user_id) values(33.7712863, -84.3834681, 'Felipe', 'Monteiro', 7);",
+	"insert into location(latitude, longitude, firstname, lastname, user_id) values(33.7726776, -84.3840475, 'Nathan', 'Hagar', 8);",
+];
+
 var init = function() {
 	var deferred = Q.defer();
 
@@ -143,12 +162,13 @@ var init = function() {
 			});
 		},
 		function(callback) {
-			db.run("insert into user(firstname, lastname, email, password, role) " +
-				" values('admin', 'admin', 'admin', 'admin', 'admin');",
-				function(err) {
-					callback(err);
-				}
-			);
+			for (var i = 0; i < dummy_data.length; i++) {
+				db.run(dummy_data[i],
+					function(err) {
+						callback(err);
+					}
+				);
+			}
 		}
 	], function(err) {
 		deferred.resolve(err);
